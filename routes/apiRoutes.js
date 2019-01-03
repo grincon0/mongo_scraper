@@ -1,8 +1,13 @@
 const express = require('express');
-const router = express.Router();
+
 const axios = require('axios');
 
-const db = require('../models');
+const db = require('../models/index');
+
+const cheerio = require('cheerio');
+
+const mongoose = require('mongoose');
+const router = express.Router();
 
 
 router.get('/', (req, res) => {
@@ -20,15 +25,15 @@ router.get('/home', (req, res) => {
 });
 
 router.get("/scrape", function () {
-    axios.get("https://medium.freecodecamp.org/").then(function (res) {
+    axios.get("https://www.spriters-resource.com/").then(function (response) {
 
         let $ = cheerio.load(response.data);
 
-        $(".section-content h3").each(function (i, elem) {
+        $("div.updatesheeticons").each(function (i, elem) {
             let result = {};
 
-            result.title = $(this).children("a").text();
-            result.link = $(this).children("a").attr("href");
+            result.title = $(elem).children("a").text();
+            result.link = $(elem).children("a").attr("href");
 
 
             db.Article.create(result)
@@ -41,7 +46,11 @@ router.get("/scrape", function () {
 
         })
 
-    })
-    res.redirect('/home');
-})
+    }).then(function(res){
+       console.log(res);
+    });
+    
+});
 
+
+module.exports = router;
