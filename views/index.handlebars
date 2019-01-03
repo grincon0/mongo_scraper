@@ -23,8 +23,11 @@
     </div>
     <div class="row">
         <h2>Articles</h2>
-        <div class="col">
-            {{#each dbArticle}}
+        <div class="col" id="art-box">
+            <p>bleh</p>
+            {{#each article}}
+                <p>Title : {{title}}</p>
+                <p>Link: {{link}}</p>
             {{/each}}
 
         </div>
