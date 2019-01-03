@@ -17,6 +17,8 @@ const PORT = process.env.PORT || 8080;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 app.engine(express.static(path.join(__dirname, 'public')));
+
+app.engine('handlebars', exphbr({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: true }));
