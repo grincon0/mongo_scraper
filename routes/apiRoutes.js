@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
     res.redirect('/home');
 });
 
+
 router.get('/home', (req, res) => {
     db.Article.find({})
         .then(function (dbArticle) {
@@ -24,7 +25,17 @@ router.get('/home', (req, res) => {
         });
 });
 
-router.get("/scrape", function () {
+router.get('/saved', (req, res) => {
+    db.Article.find({})
+    .then(function (dbArticle) {
+        res.render('saved', { article: dbArticle });
+    })
+    .catch(function (err) {
+        res.json(err);
+    });
+})
+
+router.get("/scrape", function (req, res) {
     axios.get("https://www.spriters-resource.com/").then(function (response) {
 
         let $ = cheerio.load(response.data);
@@ -41,16 +52,29 @@ router.get("/scrape", function () {
                     console.log(dbArticle);
                 })
                 .catch(function (err) {
-                    return res.json(err);
+                   /*  return res.json(err); */
                 });
 
         })
 
-    }).then(function(res){
-       console.log(res);
+    }).then(function (res) {
+        console.log(res);
     });
-    
+
 });
 
+router.post('/update/:id', (req, res) => {
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }).then(function (dbArticle) {
+       
+        //res.json(dbArticle);
+        res.sendStatus(200);
+        console.log('saved');
+    }).catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+            console.log('nallls');
+    });
+
+})
 
 module.exports = router;
