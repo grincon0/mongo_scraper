@@ -10,11 +10,19 @@ $(document).ready(function () {
         })
     });
 
+    $('.save-btn').on("click", function(){
+        let id = $(this).attr('ident');
+        console.log('atricle is saved')
+        $.ajax({
+            method: "POST",
+            url: `/update/${id}`
+
+        }).then(function(data){
+            console.log(data);
+            location.reload();
+        })
+    });
     checkEmpty('#art-box');
-
-
-
-
 });
 
 
