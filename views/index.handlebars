@@ -1,6 +1,6 @@
 <div class="container-fluid bg-dark">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,12 +22,15 @@
 
     </div>
     <div class="row">
-        <h2>Articles</h2>
+        <h2 class="title">Articles</h2>
+    </div>
+    <div class="row">
+        
         <div class="col" id="art-box">
-            <p>bleh</p>
+            
             {{#each article}}
             {{#unless saved}}
-            <div class="card" style="width: 18rem;">
+            <div class="card art-block" style="width: 18rem;">
                 <img class="card-img-top" src="..." alt="Card image cap">
                 <div class="card-body">
 

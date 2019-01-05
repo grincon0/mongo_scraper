@@ -1,0 +1,13 @@
+.art-block{
+    float:left;
+    margin: 1em;
+}
+
+.title{
+    font-size: 3em;
+    color:white;
+    position: relative;
+    left:50%;
+    text-align: center;
+
+}
