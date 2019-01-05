@@ -26,18 +26,20 @@
         <div class="col" id="art-box">
             <p>bleh</p>
             {{#each article}}
+            {{#unless saved}}
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="..." alt="Card image cap">
                 <div class="card-body">
-                    
+
                     <h5 class="card-title">Title : {{title}}</h5>
                     <p class="card-text">Link: {{link}}</p>
-                    <a class="btn btn-primary save-btn"  ident={{_id}}>Save</a>
+                    <a class="btn btn-primary save-btn" ident={{_id}}>Save</a>
                 </div>
             </div>
-             {{/each}}
-            
-    
+            {{/unless}}
+            {{/each}}
+
+
         </div>
     </div>
     <div class="row">

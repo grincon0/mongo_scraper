@@ -29,10 +29,39 @@
             {{#if saved}}
             <p>Title : {{title}}</p>
             <p>Link: {{link}}</p>
-            <button type="button" class="btn btn-primary" id="save-btn" ident={{ident}}>Unsave</button>
-        
+            <button type="button" class="btn btn-primary unsave-btn" ident={{_id}}>Remove from Saved</button>
+            <button type="button" class="btn btn-danger view-note-btn" ident={{_id}}>View Notes</button>
+
+            
+        <!-- Modal -->
+        <div class="modal fade" id={{_id}} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Article Notes</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="responseArea">
+                        <div class='notes{{_id}}'>
+                        
 
 
+                        </div>
+                        <textarea rows="4" cols="50" id="note-area" class={{_id}} placeholder="Write your note here"></textarea>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary add-note-btn" data-dismiss="modal" ident={{_id}}>Add Note</button>
+                        <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal" ident={{_id}}>Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    
             {{/if}}
             {{/each}}
 
