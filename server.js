@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbr = require('express-handlebars');
 const path = require('path');
+const db = require('./models/index');
 const routing = require('./routes/apiRoutes');
 const app = express();
 
