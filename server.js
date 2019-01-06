@@ -10,7 +10,7 @@ app.engine('handlebars', exphbr({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/home', routing);
+app.use('/', routing);
 
 
 app.listen(PORT, function (){
