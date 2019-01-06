@@ -2,7 +2,7 @@ const express = require('express');
 
 const axios = require('axios');
 
-const db = require('../models/index');
+const db = require('../models/Index');
 
 const cheerio = require('cheerio');
 
