@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Allows users to scrape articles, while saving and commenting on favorites",
   "engines": {
-    "node":"8.11.3",
-    "npm":"5.6.0"
+    "node":"11.6.0",
+    "npm":"6.5.0"
   },
   "main": "server.js",
   "scripts": {
