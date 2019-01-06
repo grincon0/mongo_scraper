@@ -62,7 +62,8 @@ $(document).ready(function () {
             }).then(function (data) {
                
                 let newDiv = $('<div>',{
-                    id: `card-${id}`
+                    id: `card-${id}`,
+                    class: `card-div`
                 });
 
                 $(newDiv).append(`<p>${data.note.body}</p>`);
@@ -97,6 +98,8 @@ $(document).ready(function () {
     $(document).on('click', ".del-note-btn", function() {
         console.log('fjekjf');
         let id = $(this).attr('data-id');
+
+        $(this).parents(".card-div").remove();
         
         $.ajax({
             method: 'DELETE',
@@ -104,7 +107,9 @@ $(document).ready(function () {
         }).then(function (data) {
             console.log('delete passed');
       
-            $(`#card-${id}`).remove();
+            /*  $(`#card-${id}`).remove(); 
+            $(this).remove(); */
+            
 
         }).then(function () {
             console.log('it worked');
