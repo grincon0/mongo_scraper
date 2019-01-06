@@ -3,7 +3,7 @@ const exphbr = require('express-handlebars');
 const mongoose = require('mongoose');
 const path = require('path');
 
-/* const scrape = require('./controllers/scraper-controller'); */
+
 const routing = require('./routes/apiRoutes');
 
 
