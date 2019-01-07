@@ -61,6 +61,7 @@ router.get("/scrape", function (req, res) {
             db.Article.create(result)
                 .then(function (dbArticle) {
                     console.log('returned article', dbArticle);
+                    res.sendStatus(200);
                 })
                 .catch(function (err) {
                     /*  return res.json(err); */
