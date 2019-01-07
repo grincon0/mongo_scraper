@@ -1,8 +1,12 @@
 {
-  "name": "scraper",
+  "name": "mongo_scraper",
   "version": "1.0.0",
   "description": "Allows users to scrape articles, while saving and commenting on favorites",
-  "main": "server.js",
+  "engines": {
+    "node":"11.6.0",
+    "npm":"6.5.0"
+  },
+  "main": "Index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -18,6 +22,7 @@
     "express-handlebars": "^3.0.0",
     "mongoose": "^5.4.1",
     "morgan": "^1.9.1",
+    "nodemon": "^1.18.9",
     "path": "^0.12.7"
   }
 }

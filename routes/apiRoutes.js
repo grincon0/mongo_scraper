@@ -1,13 +1,23 @@
 const express = require('express');
-
 const axios = require('axios');
 
-const db = require('../models/Index');
-
+const db = require('../models/index');
+const mongoose = require('mongoose');
 const cheerio = require('cheerio');
-
 const router = express.Router();
 
+
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
+    .then(() => {
+        console.log('DATABASE CONNECTION SUCCESSFUL');
+    })
+    .catch((err) => {
+        console.log('DATABASE NOT FOUND', err)
+    });
 
 router.get('/', (req, res) => {
     res.redirect('/home');
@@ -35,20 +45,23 @@ router.get('/saved', (req, res) => {
 })
 
 router.get("/scrape", function (req, res) {
-    axios.get("https://www.spriters-resource.com/").then(function (response) {
+    axios.get("https://www.space.com/search-for-life").then(function (response) {
 
         let $ = cheerio.load(response.data);
 
-        $("div.updatesheeticons").each(function (i, elem) {
+        $(".search-item").each(function (i, elem) {
             let result = {};
 
-            result.title = $(elem).children("a").text();
-            result.link = $(elem).children("a").attr("href");
+            result.title = $(elem).find(".list-text a").text();
+            result.summary = $(elem).find("a img").attr("alt");
+            result.link = $(elem).find(".list-text a").attr("href");
+            result.photo = $(elem).find("a img").attr("src");
 
-
+            console.log(result);
             db.Article.create(result)
                 .then(function (dbArticle) {
-                    console.log(dbArticle);
+                    console.log('returned article', dbArticle);
+                    res.sendStatus(200);
                 })
                 .catch(function (err) {
                     /*  return res.json(err); */
@@ -80,11 +93,11 @@ router.post('/update/:id/:bool', (req, res) => {
 
 
 router.post("/articles/:id", function (req, res) {
- 
+
     console.log(req.body);
     db.Note.create(req.body)
         .then(function (dbNote) {
-            
+
             return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
         })
         .then(function (dbArticle) {
@@ -100,28 +113,28 @@ router.post("/articles/:id", function (req, res) {
 router.get("/notes/:id", function (req, res) {
 
     db.Article.findOne({ _id: req.params.id })
-        
+
         .populate("note")
         .then(function (dbArticle) {
-            
+
             res.json(dbArticle);
 
         })
         .catch(function (err) {
-           
+
             res.json(err);
         });
 });
 
 router.delete('/notes/:id', function (req, res) {
-    
-    db.Note.findOneAndRemove({ _id: req.params.id }).then(function(data){
+
+    db.Note.findOneAndRemove({ _id: req.params.id }).then(function (data) {
         res.json(data);
     }).catch(function (err) {
-     
+
         res.json(err);
     });
-        
+
 
 });
 
