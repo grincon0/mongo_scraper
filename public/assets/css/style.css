@@ -15,7 +15,7 @@ body{
     float:left;
     margin: 0.8em;
     opacity: 0;
-    animation: fadeIn 0.6s ease-out 0.2s  forwards;
+    animation: fadeIn 0.6s ease 0.2s  forwards;
     transition: all 0.2s ease;
 }
 
@@ -73,6 +73,15 @@ body{
     text-align: center;
 }
 
+
+.wide{
+    background: #09203f;
+    color: aliceblue;
+}
+
+.links{
+    color: aliceblue;
+}
 
 
 

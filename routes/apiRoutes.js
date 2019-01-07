@@ -60,30 +60,30 @@ router.get("/scrape", function (req, res) {
             console.log(result);
 
             db.Article.findOne({ title: result.title })
-            .then((dbArticle) => {
-               
-                if (dbArticle) {
-                    console.log("Deplicate Article...Skipping.");
-                } else {
-                    db.Article.create(result)
-                        .then((dbArticle) => {
-                            
-                            console.log(dbArticle);
-                        })
-                        .catch((err) => {
-                           
-                            return res.json(err);
-                        });
-                }
-            })
-            .catch((err) => {
-                
-                res.json(err);
-            });
-    });
+                .then((dbArticle) => {
+
+                    if (dbArticle) {
+                        console.log("Deplicate Article...Skipping.");
+                    } else {
+                        db.Article.create(result)
+                            .then((dbArticle) => {
+
+                                console.log(dbArticle);
+                            })
+                            .catch((err) => {
+
+                                return res.json(err);
+                            });
+                    }
+                })
+                .catch((err) => {
+
+                    res.json(err);
+                });
         });
-        res.redirect('/home');
-    })
+    });
+    res.redirect('/home');
+})
 
 
 
@@ -124,12 +124,14 @@ router.post("/articles/:id", function (req, res) {
 
 router.get("/notes/:id", function (req, res) {
 
+
     db.Article.findOne({ _id: req.params.id })
 
         .populate("note")
         .then(function (dbArticle) {
-
+            console.log(dbArticle);
             res.json(dbArticle);
+
 
         })
         .catch(function (err) {
