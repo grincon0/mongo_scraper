@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -15,74 +15,68 @@
             </div>
         </div>
     </nav>
-    <div class="row">
-        <div class="col">
-
-        </div>
-
+    <br>
+    <div class="row title-box">
+        <h2 class="title">Saved Articles</h2>
     </div>
+    <br>
     <div class="row">
-        <h2>Saved Articles</h2>
         <div class="col" id="art-box">
+
+            {{#each article}}
+            {{#if saved}}
             <div class="card art-block" style="width: 18rem;">
+                <a href="https://www.space.com/{{link}}">
+                    <div class="card-body">
 
-                <div class="card-body">
-                    
-                    {{#each article}}
-                    {{#if saved}}
-                    <h4 class="card-title">{{title}}</h4>
-                    <img class="card-img-top" src={{photo}}>
-                    <h6>{{summary}}</h6>
-                      <a class="card-text" href="https://www.space.com/{{link}}">Read More >></a>
-                    <br>
-                    <button type="button" class="btn btn-primary unsave-btn" ident={{_id}}>Remove from Saved</button>
-                    <button type="button" class="btn btn-danger view-note-btn" ident={{_id}}>View Notes</button>
+                        <h4 class="card-title">{{title}}</h4>
+                        <img class="card-img-top" src={{photo}}>
+                        <h6>{{summary}}</h6>
+                </a>
+                <br>
+                <button type="button" class="btn btn-primary unsave-btn" ident={{_id}}>Remove from Saved</button>
+                <button type="button" class="btn btn-danger view-note-btn" ident={{_id}}>View Notes</button>
 
 
-                    <!-- Modal -->
-                    <div class="modal fade" id={{_id}} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle">Article Notes</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body" id="responseArea">
-                                    <div class='notes{{_id}}'>
+                <!-- Modal -->
+                <div class="modal fade" id={{_id}} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Article Notes</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="responseArea">
+                                <div class='notes{{_id}}'>
 
 
-
-                                    </div>
-                                    <textarea rows="4" cols="50" id="note-area" class={{_id}} placeholder="Write your note here"></textarea>
 
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary add-note-btn" data-dismiss="modal"
-                                        ident={{_id}}>Add Note</button>
-                                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal"
-                                        ident={{_id}}>Close</button>
+                                <textarea rows="4" cols="50" id="note-area" class={{_id}} placeholder="Write your note here"></textarea>
 
-                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary add-note-btn" data-dismiss="modal" ident={{_id}}>Add
+                                    Note</button>
+                                <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal" ident={{_id}}>Close</button>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {{/if}}
-            {{/each}}
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-
-
-
         </div>
 
+        {{/if}}
+        {{/each}}
+
     </div>
+
+</div>
+
 </div>
