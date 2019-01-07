@@ -45,20 +45,22 @@ router.get('/saved', (req, res) => {
 })
 
 router.get("/scrape", function (req, res) {
-    axios.get("https://www.spriters-resource.com/").then(function (response) {
+    axios.get("https://www.space.com/search-for-life").then(function (response) {
 
         let $ = cheerio.load(response.data);
 
-        $("div.updatesheeticons").each(function (i, elem) {
+        $(".search-item").each(function (i, elem) {
             let result = {};
 
-            result.title = $(elem).children("a").text();
-            result.link = $(elem).children("a").attr("href");
+            result.title = $(elem).find(".list-text a").text();
+            result.summary = $(elem).find("a img").attr("alt");
+            result.link = $(elem).find(".list-text a").attr("href");
+            result.photo = $(elem).find("a img").attr("src");
 
-
+            console.log(result);
             db.Article.create(result)
                 .then(function (dbArticle) {
-                    console.log(dbArticle);
+                    console.log('returned article', dbArticle);
                 })
                 .catch(function (err) {
                     /*  return res.json(err); */

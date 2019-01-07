@@ -31,11 +31,14 @@
             {{#each article}}
             {{#unless saved}}
             <div class="card art-block" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                
                 <div class="card-body">
 
-                    <h5 class="card-title">Title : {{title}}</h5>
-                    <p class="card-text">Link: {{link}}</p>
+                    <h4 class="card-title">{{title}}</h1>
+                   <img class="card-img-top" src={{photo}} alt="Card image cap">
+                    <h6>{{summary}}</h6>
+                    <a class="card-text" href="https://www.space.com/{{link}}">Read More >></a>
+                    <br>
                     <a class="btn btn-primary save-btn" ident={{_id}}>Save</a>
                 </div>
             </div>

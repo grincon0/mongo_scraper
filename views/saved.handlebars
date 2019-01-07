@@ -27,8 +27,10 @@
             <p>bleh</p>
             {{#each article}}
             {{#if saved}}
-            <p>Title : {{title}}</p>
-            <p>Link: {{link}}</p>
+            <h1>{{title}}</h1>
+            <img src={{photo}}>
+            <h4>{{summary}}</h4>
+            <p>{{link}}</p>
             <button type="button" class="btn btn-primary unsave-btn" ident={{_id}}>Remove from Saved</button>
             <button type="button" class="btn btn-danger view-note-btn" ident={{_id}}>View Notes</button>
 
