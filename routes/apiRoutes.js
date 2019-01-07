@@ -58,22 +58,34 @@ router.get("/scrape", function (req, res) {
             result.photo = $(elem).find("a img").attr("src");
 
             console.log(result);
-            db.Article.create(result)
-                .then(function (dbArticle) {
-                    console.log('returned article', dbArticle);
-                    res.sendStatus(200);
-                })
-                .catch(function (err) {
-                    /*  return res.json(err); */
-                });
 
-        })
-
-    }).then(function (res) {
-        console.log(res);
+            db.Article.findOne({ title: result.title })
+            .then((dbArticle) => {
+               
+                if (dbArticle) {
+                    console.log("Deplicate Article...Skipping.");
+                } else {
+                    db.Article.create(result)
+                        .then((dbArticle) => {
+                            
+                            console.log(dbArticle);
+                        })
+                        .catch((err) => {
+                           
+                            return res.json(err);
+                        });
+                }
+            })
+            .catch((err) => {
+                
+                res.json(err);
+            });
     });
+        });
+        res.redirect('/home');
+    })
 
-});
+
 
 router.post('/update/:id/:bool', (req, res) => {
     console.log(req.params);
