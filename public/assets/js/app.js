@@ -57,12 +57,15 @@ $(document).ready(function () {
 
 
         }).then(function () {
+
+
             $.ajax({
                 method: "GET",
                 url: `/notes/${id}`
             }).then(function (data) {
 
                 console.log(data)
+                $(`.notes${id}`).empty();
 
                 for(let i = 0; i < data.note.length; i++){
                     let newDiv = $('<div>',{
@@ -100,8 +103,8 @@ $(document).ready(function () {
         let id = $(this).attr('ident');
         $(`.${id}`).empty();
 
-    })
-    checkEmpty('#art-box');
+    });
+    
 
     //delegating onClick func after dynamic btn creation
     $(document).on('click', ".del-note-btn", function() {
@@ -125,6 +128,8 @@ $(document).ready(function () {
           
         });  
      });
+
+     checkEmpty('#art-box');
 });
 
 
@@ -132,7 +137,7 @@ $(document).ready(function () {
 
 const checkEmpty = (classOrId) => {
     if ($(classOrId).is(':empty')) {
-        $(classOrId).text('There are no articles scraped. Try scrapping them.');
+        $(classOrId).append('There are no articles scraped. Try scrapping them.');
     } else {
         return 'div has content';
     }
