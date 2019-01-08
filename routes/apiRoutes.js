@@ -68,13 +68,16 @@ router.get("/scrape", function (req, res) {
                         db.Article.create(result)
                             .then((dbArticle) => {
 
-                                console.log(dbArticle);
+                                //res.status(200).json({status:"ok"})
+                                //console.log(dbArticle);
                             })
                             .catch((err) => {
 
                                 return res.json(err);
                             });
                     }
+                }).then((response) => { 
+                    res.redirect('/home');
                 })
                 .catch((err) => {
 
@@ -82,7 +85,7 @@ router.get("/scrape", function (req, res) {
                 });
         });
     });
-    res.redirect('/home');
+    
 })
 
 
@@ -109,8 +112,8 @@ router.post("/articles/:id", function (req, res) {
     console.log(req.body);
     db.Note.create(req.body)
         .then(function (dbNote) {
-
-            return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+            //new
+            return db.Article.findOneAndUpdate({ _id: req.params.id },{ $push :{ note: dbNote._id }} , { new: true });
         })
         .then(function (dbArticle) {
 
