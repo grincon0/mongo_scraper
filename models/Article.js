@@ -23,11 +23,11 @@ const ArticleSchema = new Schema({
         type: Boolean,
         default: false
     },
-    
-    note: {
+    //new changed to arry of objs
+    note: [{
         type: Schema.Types.ObjectId,
         ref: "Note"
-    }
+    }]
 });
 
 const Article = mongoose.model("Article", ArticleSchema);

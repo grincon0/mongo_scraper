@@ -61,17 +61,25 @@ $(document).ready(function () {
                 method: "GET",
                 url: `/notes/${id}`
             }).then(function (data) {
-               
-                let newDiv = $('<div>',{
-                    id: `card-${id}`,
-                    class: `card-div`
-                });
 
-                $(newDiv).append(`<p>${data.note.body}</p>`);
-                // A button to submit a new note, with the id of the article saved to it
-                $(newDiv).append(`<button art-ref=${id} data-id=${data._id} class=del-note-btn>Delete Note</button>`);
-                console.log(newDiv);
-                $(`.notes${id}`).append(newDiv);
+                console.log(data)
+
+                for(let i = 0; i < data.note.length; i++){
+                    let newDiv = $('<div>',{
+                        id: `card-${id}`,
+                        class: `card-div`
+                    });
+    
+                    $(newDiv).append(`<p>${data.note[i].body}</p>`);
+                    // A button to submit a new note, with the id of the article saved to it
+                    $(newDiv).append(`<button art-ref=${id} data-id=${data.note[i]._id} class=del-note-btn>Delete Note</button>`);
+                    
+                    $(`.notes${id}`).append(newDiv);
+                }
+                   
+               
+            
+                
             });
         });
 
